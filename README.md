@@ -2,7 +2,7 @@
 
 ## But du programme
 Ce programme permet de transformer une image en caractères ASCII. Voici un exemple effectué avec une photo de mon visage :
-
+```
 ..............................................................
 ..............................................................
 ................................::++--........................
@@ -43,9 +43,11 @@ Ce programme permet de transformer une image en caractères ASCII. Voici un exem
 ..::==--::::--::------====----============++++==----==------..
 ::::::::--::----::----==========++====++==++====++------------
 ----::::::::--::--::------========================--==--------
-
+```
 ## UTILISATION
 Pour utiliser le programme :
+```
 javac ASCIIConversion.java
 java ASCIIConversion.java <image> <size>
+```
 
