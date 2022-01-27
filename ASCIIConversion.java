@@ -16,13 +16,19 @@ public class ASCIIConversion
 		int size = 30;
 		boolean x2 = true;
 		if(args.length == 0)
-			url = "photo-identite.jpg";
+		{
+			showHelp();
+			System.exit(1);
+			return;
+		}
 		else
 		{
 			url = args[0];
 			if(!(new File(url).exists()))
 			{
-				System.out.println("Le fichier précisé n'existe pas.");
+				System.out.println("This file doesn't exist.");
+				showHelp();
+				System.exit(2);
 				return;
 			}
 		}
@@ -32,30 +38,31 @@ public class ASCIIConversion
 			try
 			{
 				size = Integer.parseInt(args[1]);
-				if(size <= 0)
-					size = 30;
-			}catch(Exception e){}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Wrong size !");
+				showHelp();
+				System.exit(3);
+				return;
+			}
+
+			if(size <= 0)
+			{
+				System.out.println("Size must be greater than 0 !");
+				showHelp();
+				System.exit(4);
+				return;
+			}
 
 			if(args.length > 2)
 				x2 = false;
 		}
 
-
-
 		BufferedImage img = resize(loadImg(url), size, size);
 
 		if(img == null)
 			return;
-
-		/*
-		int[][] grayTab = getGrayTab(img);
-
-		for(int j=0;j<grayTab.length;j++)
-		{
-			for(int i=0;i<grayTab[0].length;i++)
-				System.out.print(grayTab[j][i]+" ");
-			System.out.println();
-		}*/
 
 		drawTab(getASCIITab(getGrayTab(img), img.getWidth(), img.getHeight()), x2);
 	}
@@ -199,6 +206,13 @@ public class ASCIIConversion
 				matrix[j][i] = img.getRGB(j, i);
 
 		return matrix;
+	}
+
+	public static void showHelp()
+	{
+		System.out.println("Help :");
+		System.out.println("java ASCIIConversion.java <image> [size]");
+		System.out.println("-> [size] must be greater than 0");
 	}
 
 }
