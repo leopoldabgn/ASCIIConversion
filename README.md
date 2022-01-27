@@ -48,6 +48,6 @@ Ce programme permet de transformer une image en caractères ASCII. Voici un exem
 Pour utiliser le programme :
 ```
 javac ASCIIConversion.java
-java ASCIIConversion.java <image> <size>
+java ASCIIConversion.java <image> [size]
 ```
 
