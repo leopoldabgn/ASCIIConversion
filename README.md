@@ -46,6 +46,6 @@ This program allows you to transform an image into ASCII characters. Here is an 
 To use the program :
 ```
 javac ASCIIConversion.java
-java ASCIIConversion.java <image> [size]
+java ASCIIConversion.java <image> [size] [space] [x2]
 ```
 

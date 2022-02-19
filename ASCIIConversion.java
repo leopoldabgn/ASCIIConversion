@@ -13,7 +13,7 @@ public class ASCIIConversion
 	public static void main(String[] args)
 	{
 		String url;
-		int size = 30;
+		int size = 30, space = 0;
 		boolean x2 = true;
 		if(args.length == 0)
 		{
@@ -55,7 +55,21 @@ public class ASCIIConversion
 				return;
 			}
 
-			if(args.length > 2)
+			if(args.length > 2) {
+				try {
+					space = Integer.parseInt(args[2]);
+					if(space < 0)
+						throw new Exception();
+				} catch(Exception e) {
+					System.out.println("Space must be greater or equals to 0 !");
+					showHelp();
+					System.exit(5);
+					return;
+				}
+				
+			}
+
+			if(args.length > 3)
 				x2 = false;
 		}
 
@@ -64,7 +78,7 @@ public class ASCIIConversion
 		if(img == null)
 			return;
 
-		drawTab(getASCIITab(getGrayTab(img), img.getWidth(), img.getHeight()), x2);
+		drawTab(getASCIITab(getGrayTab(img), img.getWidth(), img.getHeight()), space, x2);
 	}
 
 	public static int[] getNewDim(BufferedImage pic, int w_max, int h_max)
@@ -141,10 +155,12 @@ public class ASCIIConversion
 		return grayTab;
 	}
 
-	public static void drawTab(char[][] tab, boolean x2)
+	public static void drawTab(char[][] tab, int space, boolean x2)
 	{
 		for(int j=0;j<tab[0].length;j++)	// On affiche le tableau dans le
 		{									// bon sens...
+			if(space > 0)
+				System.out.print(" ".repeat(space));
 			for(int i=0;i<tab.length;i++)
 			{
 				System.out.print(tab[i][j]+"");
@@ -211,8 +227,9 @@ public class ASCIIConversion
 	public static void showHelp()
 	{
 		System.out.println("Help :");
-		System.out.println("java ASCIIConversion.java <image> [size]");
+		System.out.println("java ASCIIConversion.java <image> [size] [space] [x2]");
 		System.out.println("-> [size] must be greater than 0");
+		System.out.println("-> [space] must be greater or equals to 0");
 	}
 
 }
